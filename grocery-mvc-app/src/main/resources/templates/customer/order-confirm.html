@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Item - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+        <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>  
+        <style>
+body{
+    background:#eee;
+}
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+.text-reset {
+    --bs-text-opacity: 1;
+    color: inherit!important;
+}
+a {
+    color: #5465ff;
+    text-decoration: none;
+}     </style>
+        <script>
+        function logout()
+        {
+         sessionStorage.clear();
+         localStorage.clear();
+        
+        }
+        
+        
+         function loaddata()
+		  {
+		   $("#orderId").text(sessionStorage.getItem("orderId"));
+		   $("#orderDate").text(sessionStorage.getItem("orderDate"));
+		   $(".transactionMode").text(sessionStorage.getItem("transactionMode"));
+		   $("#deliveryStatus").text(sessionStorage.getItem("deliveryStatus"));
+		   $("#customerAddress").val(sessionStorage.getItem("customerAddress"));
+		   $("#customerPhone").val(sessionStorage.getItem("customerPhone"));
+		   $("#subTotal").text(sessionStorage.getItem("subTotal"));
+		   $("#shippingCharge").text("50");
+		   var subtotal=parseFloat(sessionStorage.getItem("subTotal"));
+		   var discount=parseFloat(0);
+		   var shippingcharge=50;
+		   var total=subtotal+shippingcharge-discount;
+		   $("#discount").text(sessionStorage.getItem("discount"));
+		   $(".total").text(total);
+		   $(".customerName").text(sessionStorage.getItem("customerName"));
+		   $(".customerAddress").text(sessionStorage.getItem("customerAddress"));
+		   $(".customerPhone").text(sessionStorage.getItem("customerPhone"));
+		  }
+        
+        </script>
+    </head>
+    <body onload="loaddata()">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="/groceryshop">Grocery Store</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/groceryshop">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/productsbycategory/2">Packaged Food</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/productsbycategory/3">Household Care</a></li>
+               
+                        <li class="nav-item"><a class="nav-link" href="/productsbycategory/6">Personal and Beauty</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/productsbycategory/4">Dairy Products</a></li>
+                       <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="/orders">Orders</a></li>
+                                <li><a class="dropdown-item" href="/logout" onclick="logout()">Logout</a></li>
+                             </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a href="/cartproducts" class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span id="cart" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1>Orders</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Please check order status</p>
+                </div>
+            </div>
+        </header>
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+            <div class="container">
+ 
+
+<div class="container-fluid">
+
+<div class="container">
+  <!-- Title -->
+  <div class="d-flex justify-content-between align-items-center py-3">
+    <h2 class="h5 mb-0" ><a href="#" class="text-muted"></a> Order #<span id="orderId"></span></h2>
+  </div>
+
+  <!-- Main content -->
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Details -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="mb-3 d-flex justify-content-between">
+            <div>
+              <span class="me-3" id="orderDate"></span>
+              <span class="me-3 transactionMode" id="transactionMode"></span>
+              <span class="badge rounded-pill bg-info" id="deliveryStatus"></span>
+            </div>
+            <div class="d-flex">
+              <div class="dropdown">
+                <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <table class="table table-borderless">
+            <tbody id="product-div">
+               
+            
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" >Subtotal</td>
+                <td class="text-end" id="subTotal"></td>
+              </tr>
+              <tr>
+                <td colspan="2" >Shipping</td>
+                <td class="text-end" id="shippingCharge"></td>
+              </tr>
+              <tr>
+                <td colspan="2" >Discount (Code: NEWYEAR)</td>
+                <td class="text-danger text-end" id="discount"></td>
+              </tr>
+              <tr class="fw-bold">
+                <td colspan="2">TOTAL</td>
+                <td class="text-end total"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <!-- Payment -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <h3 class="h6">Payment Method</h3>
+              <p class="transactionMode"><br>
+              <p>Total:&nbsp;&nbsp;<span class="total"> </span></p> <span class="badge bg-success rounded-pill">Cash On Delivery</span></p>
+            </div>
+            <div class="col-lg-6">
+              <h3 class="h6">Billing address</h3>
+             <address>
+            <strong class="customerName"></strong><br>
+            <p class="customerAddress"> </p><br/>
+            <abbr title="Phone" class="customerPhone"></abbr> 
+          </address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <!-- Customer Notes -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="h6">Customer Notes</h3>
+          <p>Thanks so much for your order!<br/> We hope you enjoy your new purchase! </p>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <!-- Shipping information -->
+        <div class="card-body">
+          <h3 class="h6">Delivery Information</h3>
+          <!--   <strong>FedEx</strong>-->
+          <span><a href="/order-status/1" class="text-decoration-underline" target="_blank">CLick Here</a> <i class="bi bi-box-arrow-up-right"></i> </span>
+          <hr>
+          <h3 class="h6">Address</h3>
+          <address>
+            <strong class="customerName"></strong><br>
+            <p class="customerAddress"> </p><br/>
+            <abbr title="Phone" class="customerPhone"></abbr> 
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+    
+    </div>
+
+
+            </div>
+        </section>
+     
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>
+   <script type="text/javascript">
+        if(localStorage.length>=2)
+        {
+         
+          $("#cart").text(parseInt(localStorage.lastindex));
+        }
+        
+  if(localStorage.length>1)
+  {
+  
+	  for(var i in localStorage)
+	  {
+		  if(i!="lastindex")
+		  {
+		  var product=JSON.parse(localStorage.getItem(i));
+		  
+		  $("#product-div").append('<tr>\
+                <td>\
+                  <div class="d-flex mb-2">\
+                    <div class="flex-shrink-0">\
+                      <img src="'+product.productImage+'" alt="" width="35" class="img-fluid">\
+                    </div>\
+                    <div class="flex-lg-grow-1 ms-3">\
+                      <h6 class="small mb-0"><a href="#" class="text-reset">'+product.productName+'</a></h6>\
+                      <span class="small">'+product.productInfo+'</span>\
+                    </div>\
+                  </div>\
+                </td>\
+                <td>'+product.productQuantity+'</td>\
+                <td class="text-end">'+product.productPrice+'</td>\
+              </tr>');
+		  
+		  }
+      } 
+  }
+  else
+  {
+  
+   $("#heading").text("Your cart is empty!!");
+  
+  }
+  
+  
+		        
+        </script>
+    </body>
+</html>
